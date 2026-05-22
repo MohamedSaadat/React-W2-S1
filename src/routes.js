@@ -1,0 +1,5 @@
+export const routes = [
+  { path: "/", routeName: "Home" },
+  { path: "/about", routeName: "About" },
+  { path: "/services", routeName: "Services" },
+];
