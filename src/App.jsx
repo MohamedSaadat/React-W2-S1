@@ -1,9 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
-import NotFound from "./NotFound";
-import Services from "./Services";
 import Layout from "./Layout";
+import NotFound from "./NotFound";
+import Projects from "./Projects";
+import Services from "./Services";
+import Web from "./Web";
+import Android from "./Android";
+import IOS from "./IOS";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +21,17 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
+      {
+        path: "projects",
+        element: <Projects />,
+        children: [
+          { path: "", element: <Navigate to={"web"} /> },
+          { path: "web", element: <Web /> },
+          { path: "android", element: <Android /> },
+          { path: "ios", element: <IOS /> },
+          { path: "*", element: <NotFound /> },
+        ],
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
