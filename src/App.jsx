@@ -12,6 +12,7 @@ import Services from "./Services";
 import Web from "./Web";
 import Android from "./Android";
 import IOS from "./IOS";
+import Products from "./Products";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
+      { path: "Products", element: <Products /> },
       {
         path: "projects",
         element: <Projects />,

@@ -3,4 +3,5 @@ export const routes = [
   { path: "/about", routeName: "About" },
   { path: "/services", routeName: "Services" },
   { path: "/projects", routeName: "Projects" },
+  { path: "/Products", routeName: "Products" },
 ];
