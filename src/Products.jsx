@@ -1,30 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
+import axios from "axios";
 
 export default function Products() {
-  const [products, setProduct] = useState([
-    {
-      name: "product 1",
-      price: 10,
-      type: "T1",
-    },
-    {
-      name: "product 2",
-      price: 20,
-      type: "T2",
-    },
-    {
-      name: "product 3",
-      price: 30,
-      type: "T3",
-    },
-  ]);
+  const [products, setProducts] = useState([]);
+
+  async function getProducts() {
+    const response = await axios(
+      "https://ecommerce.routemisr.com/api/v1/products"
+    );
+    setProducts(response.data.data);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   function deleteProduct(productIndex) {
     let newProducts = products.filter(
       (product, index) => index != productIndex,
     );
-    setProduct(newProducts);
+    setProducts(newProducts);
+  }
+
+  function updateProduct(productIndex, price) {
+    const newProducts = structuredClone(products);
+    newProducts[productIndex].price = price;
+    setProducts(newProducts);
   }
 
   return (
@@ -34,11 +36,14 @@ export default function Products() {
         <div className="row g-4">
           {products.map((product, index) => {
             return (
-              <Product
-                product={product}
-                index={index}
-                deleteProduct={deleteProduct}
-              />
+              <div className="col-md-4">
+                <Product
+                  product={product}
+                  index={index}
+                  deleteProduct={deleteProduct}
+                  updateProduct={updateProduct}
+                />
+              </div>
             );
           })}
         </div>
